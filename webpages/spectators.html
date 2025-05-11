@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset = 'utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#621360"/>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href = "myStyle.css">
+    <title>Spectators</title>
+</head>
+
+<body>
+    <header>Final Results</header>
+    <main>
+        <section>
+            <table>
+                <caption>Race Results</caption>
+                <thead>
+                    <th>Position</th>
+                    <th>Racer ID</th>
+                    <th>Time</th>
+                </thead>
+                <tbody>
+                    <!-- Table rows for table displaying final results of race dynamically created here-->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', getData);
+
+
+        async function getData() { // FUNCTION TO POST THE TABLE DATA FOR THE RECORDED TIME OF EACH RACER AND THEIR POSITION
+
+            try {
+                const response = await fetch('/display-final-results', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (response.ok) {
+                    const usableData = await response.json()
+                    displayResultsTable(usableData);
+                    console.log("Successfully fetched final race data results to be displayed in table.");
+                }
+                else {
+                    console.error("Failed to fetch final race datal");
+                }
+            } catch (error) {
+                console.error("Error fetching data from the server:", error);
+            }
+
+        }
+
+        function displayResultsTable(usableData) {
+            const tableBody = document.querySelector('main table tbody');
+
+            for (let b = 0; b < usableData.length; b++) {
+                const tr = document.createElement('tr');
+
+                const tableCellPosition = document.createElement('td');
+
+                tableCellPosition.textContent = usableData[b].positions;
+                tr.appendChild(tableCellPosition);
+
+                const tableCellIDs = document.createElement('td');
+                tableCellIDs.textContent = usableData[b].racer_id;
+                tr.appendChild(tableCellIDs);
+
+                const tableCellTime = document.createElement('td');
+                tableCellTime.textContent = usableData[b].race_time;
+                tr.appendChild(tableCellTime);
+
+                tableBody.appendChild(tr);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

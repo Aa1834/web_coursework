@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset = 'utf-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#621360"/>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href = "myStyle.css">
+    <title>Racer's ID Logging:</title>
+    <script>
+        if ('serviceWorker' in navigator) { // Need to check if there is a service worker before installing; register the service worker. Checking if service worker belongs to navigation.
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js') // registering my service worker which is in the sw.js.
+            });
+        }
+    </script>
+</head>
+<body>
+  <main>
+    <button id = 'table-racerID'>Add more rows</button>
+    <button id = 'post-results'>Send to server</button>
+    <section id = 'table-display'></section> <!-- Added section for the table display-->
+    <article>
+    <table id = 'racerID-table'> <!-- Table for the racers' IDs -->
+        <caption>
+            Racers' ID Table
+        </caption>
+        <thead id = "id-head">
+            <th>Position</th>
+            <th>Racer ID</th>
+        </thead>
+        <tbody id = "id-body">
+
+
+
+        </tbody>
+    </table>
+    </article>
+    </main>
+    <footer>
+    <dialog id="favDialog">
+        <form>
+          <p>
+            <label>
+              Server Address/Name :
+              <input type="text" id="serverName"/>
+            </label>
+          </p>
+          <div>
+            <button value="cancel" formmethod="dialog">Cancel</button>
+            <button id="confirmBtn" value="default">Confirm</button>
+          </div>
+        </form>
+      </dialog>
+      <p>
+        <button id="showDialog">Settings</button>
+      </p>
+      <output></output>
+      </footer>
+
+    <script src="raceIDNoters.js">
+        
+    </script>
+</body>
+</html>

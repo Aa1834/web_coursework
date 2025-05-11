@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <button id = "admin-login">Admin</button>
+        <button id = "marshal-login">marshal</button>
+        <button id = "spectator-login">Spectator</button>
+
+        <script>
+            adminButton = document.querySelector('#admin-login')
+            adminButton.addEventListener('click',redirectAdmin);
+
+            function redirectAdmin(){
+                window.location.href = 'timekeeper.html'
+            }
+
+            marshalButton = document.querySelector('#marshal-login');
+            marshalButton.addEventListener('click',redirectMarshal);
+
+            function redirectMarshal(){
+                window.location.href = 'marshals.html';
+            }
+
+            //spectatorsButton = document.querySelector('#spectator-login');
+            //spectatorsButton.addEventListener('click',windows.location.href = '');
+        </script>
+    </body>
+</html>
